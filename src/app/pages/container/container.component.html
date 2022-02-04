@@ -1,0 +1,67 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a (click)="isCollapsed = !isCollapsed">
+        <img src="assets/gisa_logo.png" alt="logo">
+        <h1>GISA</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li *ngIf="isAdmin" nz-submenu nzOpen nzTitle="Gerenciamento" nzIcon="fund">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="bpm">BPM</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Repositórios" nzIcon="form">
+        <ul>
+          <li *ngIf="isMember" nz-menu-item nzMatchRouter>
+            <a [routerLink]="['repository','member','list']">Associados</a>
+          </li>
+          <li *ngIf="isProvider" nz-menu-item nzMatchRouter>
+            <a [routerLink]="['repository','provider','list']">Prestadores</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <div nz-row nzJustify="space-around" nzAlign="middle">
+          <div nz-col nzFlex="auto">
+            <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+              <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+            </span>
+          </div>
+          <div nz-col>
+            <div class="user-avatar-menu" nz-row nzAlign="middle" nzJustify="space-around" nz-dropdown
+              [nzDropdownMenu]="menu">
+              <nz-avatar nzSize="large" nzIcon="user"></nz-avatar>
+              <span [style.marginLeft.px]="8" [style.paddingRight.px]="30">{{userName}}</span>
+            </div>
+
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu nzSelectable>
+                <li (click)="onLogoutAsync()" nz-menu-item>Sair</li>
+              </ul>
+            </nz-dropdown-menu>
+
+            <!-- <div id="gisa-brend-container">
+              <img width="75" height="35" src="assets/gisa_brend_image_text.png">
+              <img width="75" height="35" src="assets/gisa_brend_image.png">
+              <img width="75" height="35" src="assets/gisa_brend_core.png">
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

@@ -1,0 +1,4 @@
+<nz-page-header (nzBack)="onBack()" nzBackIcon nzTitle="Visualização de Diagrama [{{bpmRecord.name}}]"></nz-page-header>
+<nz-spin *ngIf="!svgSafeHtmlContent" class="loading" nzSimple></nz-spin>
+<div #bpmContainer [style.maxHeight.px]="0" class="bpm-container bpm-container-hidden"></div>
+<div class="bpm-container-svg-view" [innerHTML]="svgSafeHtmlContent"></div>

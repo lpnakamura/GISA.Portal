@@ -1,0 +1,33 @@
+<nz-page-header (nzBack)="onBack()" nzBackIcon>
+    <nz-page-header-title>{{headerTitle}}</nz-page-header-title>
+    <nz-page-header-extra>
+        <button (click)="onConfirm()" nz-button nzType="primary" nzShape="circle" nzSize="small">
+            <i nz-icon nzType="save" nzTheme="outline"></i>
+        </button>
+    </nz-page-header-extra>
+</nz-page-header>
+
+<nz-modal [(nzVisible)]="showConfirmModal" [nzOkLoading]="submitInProgress" [nzCancelLoading]="submitInProgress" [nzOkDisabled]="bpmFormGroup.invalid" [nzTitle]="modalTitle"
+    (nzOnOk)="onSubmit()" (nzOnCancel)="onDismiss()">
+    <ng-container *nzModalContent>
+        <form nz-form [nzLayout]="'horizontal'" [style.width.%]="100" [formGroup]="bpmFormGroup">
+            <nz-form-item>
+                <nz-form-control nzErrorTip="Campo nome é requerido!">
+                    <nz-input-group>
+                        <input autofocus formControlName="name" nz-input placeholder="Nome" />
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control nzErrorTip="Campo descrição é requerido!">
+                    <nz-input-group>
+                        <input formControlName="description" nz-input placeholder="Descrição" />
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
+</nz-modal>
+
+<nz-spin *ngIf="!bpmFileLoaded" class="loading" nzSimple></nz-spin>
+<div [ngClass]="{'bpm-waiting-load': !bpmFileLoaded}" #bpmContainer class="bpm-container bpm-container-calc-height"></div>

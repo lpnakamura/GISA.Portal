@@ -1,0 +1,9 @@
+<nz-page-header (nzBack)="onBack()" nzBackIcon [nzTitle]="title"></nz-page-header>
+<nz-collapse>
+    <nz-collapse-panel nzHeader="Exibição detalhada" [nzActive]="true">
+        <ngx-json-viewer [json]="record"></ngx-json-viewer>
+    </nz-collapse-panel>
+    <nz-collapse-panel *ngIf="record.operation === 'Update'" nzHeader="Atualizações">
+        <ngx-diff2html [left]="before" [right]="after" format="side-by-side"></ngx-diff2html>
+    </nz-collapse-panel>
+</nz-collapse>

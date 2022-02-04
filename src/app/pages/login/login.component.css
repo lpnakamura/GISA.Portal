@@ -1,0 +1,31 @@
+.login-container {
+    background: #1c92d2;
+    background: -webkit-linear-gradient(to right, #5da3db, #0c6ea3);
+    background: linear-gradient(to right, #5da3db, #0c6ea3);
+}
+
+.login-container,
+.login-card {
+    height: 100%;
+}
+
+.login-form {
+    max-width: 350px;
+}
+
+.login-form-margin {
+    margin-bottom: 16px;
+}
+
+.login-form-forgot {
+    float: right;
+}
+
+.login-form-button {
+    width: 100%;
+}
+
+::ng-deep .ant-card-head-title {
+    text-align: center;
+    text-transform: uppercase;
+}

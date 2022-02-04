@@ -1,0 +1,53 @@
+<nz-page-header>
+  <nz-page-header-title>BPM Lista</nz-page-header-title>
+  <nz-page-header-extra>
+    <button nz-button nzSize="small" nzType="primary" nzShape="circle" routerLink="../add">
+      <i nz-icon nzType="file-add" nzTheme="outline"></i>
+    </button>
+  </nz-page-header-extra>
+</nz-page-header>
+
+<nz-table #bpmTable nzSize="small" nzBordered [nzData]="bpmList$ | async" [nzLoading]="!bpmList.length">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th nzRight></th>
+      <th nzRight></th>
+      <th nzRight></th>
+      <th nzRight></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of bpmTable.data; let recordIndex = index">
+      <td>{{ data.name }}</td>
+      <td>{{ data.description }}</td>
+      <td nzRight>
+        <button nzSize="small" nz-button nzType="text" routerLink="../view/{{data.id}}">
+          <i nz-icon nzType="fund-view" nzTheme="outline"></i>
+          Visualizar
+        </button>
+      </td>
+      <td nzRight>
+        <button nzSize="small" nz-button nzType="text" routerLink="../edit/{{data.id}}">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+          Editar
+        </button>
+      </td>
+      <td nzRight>
+        <button nzSize="small" nz-button nzType="text" routerLink="../download/{{data.id}}">
+          <i nz-icon nzType="download" nzTheme="outline"></i>
+          Download
+        </button>
+      </td>
+      <td nzRight>
+        <button nzSize="small" nz-button nzType="text" nz-popconfirm
+          nzPopconfirmTitle="Confirma a exclusão do diagrama '{{data.name}}' ?" nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="onRemoveRecord(data, recordIndex)">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+          Remover
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -1,0 +1,33 @@
+.bpm-container {
+  height: 100%;
+  width: 100%;
+}
+
+.bpm-container-calc-height {
+  height: calc(100vh - 230px);
+}
+
+.bpm-container-hidden {
+  visibility: hidden;
+}
+
+.bpm-container-svg-view {
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  margin: 20px 0;
+  height: calc(100vh - 230px);
+}
+
+.bpm-waiting-load {
+  visibility: hidden;
+}
+
+::ng-deep.inner-content {
+  overflow: hidden !important;
+}

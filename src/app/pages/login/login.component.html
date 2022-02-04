@@ -1,0 +1,44 @@
+<div class="login-container">
+    <div class="login-card" nz-row nzJustify="space-around" nzAlign="middle">
+        <div nz-col>
+            <nz-card [style.width.px]="350" [nzBordered]="true" nzTitle="BOA SAÚDE (GISA)">
+                <nz-spin [nzSpinning]="isTryingAutomaticRefresh">
+                    <div nz-row nzJustify="space-around" nzAlign="middle" [style.marginBottom.px]="15">
+                        <img src="assets/gisa_logo_large.png">
+                    </div>
+                    <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitForm()">
+
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="Usuário é requerido!">
+                                <nz-input-group nzPrefixIcon="user">
+                                    <input autofocus type="text" nz-input formControlName="userName"
+                                        placeholder="Usuário" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="Senha é requerida!">
+                                <nz-input-group nzPrefixIcon="lock">
+                                    <input type="password" nz-input formControlName="password" placeholder="Senha" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <div nz-row class="login-form-margin">
+                            <div nz-col [nzSpan]="12">
+                                <label formControlName="rememberMe" nz-checkbox>
+                                    <span>Manter conectado</span>
+                                </label>
+                            </div>
+                            <div nz-col [nzSpan]="12">
+                                <a class="login-form-forgot">Esqueci a senha</a>
+                            </div>
+                        </div>
+                        <button [nzLoading]="isLoading" [disabled]="loginForm.invalid" nz-button
+                            class="login-form-button login-form-margin" [nzType]="'primary'">Entrar</button>
+
+                    </form>
+                </nz-spin>
+            </nz-card>
+        </div>
+    </div>
+</div>

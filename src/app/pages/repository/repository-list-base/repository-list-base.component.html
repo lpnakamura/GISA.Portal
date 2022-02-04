@@ -1,0 +1,43 @@
+<nz-page-header>
+  <nz-page-header-title>{{title}}</nz-page-header-title>
+</nz-page-header>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Search name" />
+      <button nz-button nzSize="small" nzType="primary" class="search-button">Buscar</button>
+      <button nz-button nzSize="small">Limpar</button>
+    </div>
+  </div>
+</nz-dropdown-menu>
+
+<nz-table #repositoryTable nzSize="small" nzBordered [nzData]="repositoryList$ | async"
+  [nzLoading]="!repositoryList.length" [nzSimple]="true">
+  <thead>
+    <tr>
+      <th *ngFor="let column of listOfColumns" [nzSortOrder]="column.sortOrder" [nzSortFn]="column.sortFn"
+        [nzSortDirections]="column.sortDirections" [nzFilterMultiple]="column.filterMultiple"
+        [nzFilters]="column.listOfFilter" [nzShowFilter]="column.showFilter" nzWidth="{{column.width}}px"
+        [nzFilterFn]="column.filterFn">
+        {{ column.name }}
+      </th>
+      <th nzWidth="20px">Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of repositoryTable.data; let recordIndex = index">
+      <td *ngFor="let column of listOfColumns" [ngSwitch]="column.type">
+        <ng-container *ngSwitchCase="'DATE'">{{column.rowContent(data) | date: 'dd/MM/yyyy HH:mm:ss'}}</ng-container>
+        <nz-tag *ngSwitchCase="'TAG'" [nzColor]="column.tagColor(data)">{{column.rowContent(data)}}</nz-tag>
+        <ng-container *ngSwitchDefault>{{column.rowContent(data)}}</ng-container>
+      </td>
+      <td>
+        <button nz-button nzType="text" routerLink="../view/{{data.id}}">
+          <i nz-icon nzType="fund-view" nzTheme="outline"></i>
+          Visualizar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
